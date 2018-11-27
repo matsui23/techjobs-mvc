@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -26,6 +27,8 @@ public class ListController {
         columnChoices.put("all", "All");
     }
 
+    public ArrayList<String> columns = new ArrayList<>(Arrays.asList("position type", "name", "employer", "location", "core competency"));
+
     @RequestMapping(value = "")
     public String list(Model model) {
 
@@ -40,6 +43,7 @@ public class ListController {
         if (column.equals("all")) {
             ArrayList<HashMap<String, String>> jobs = JobData.findAll();
             model.addAttribute("title", "All Jobs");
+            model.addAttribute("choices", columns);
             model.addAttribute("jobs", jobs);
             return "list-jobs";
         } else {
@@ -58,6 +62,7 @@ public class ListController {
 
         ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(column, value);
         model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+        model.addAttribute("choices", columns);
         model.addAttribute("jobs", jobs);
 
         return "list-jobs";
