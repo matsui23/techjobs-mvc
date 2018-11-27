@@ -19,10 +19,10 @@
         </div>
     </h3>
 
-    <table class="job-listing" th:each="job : ${jobs}">
-        <tr th:each="choice : ${choices}" >
-            <td th:text="${#strings.capitalizeWords(choice)}"></td>
-            <td th:text="${job.get(choice)}"></td>
+    <table class="job-listing" th:each="row : ${jobs}">
+        <tr th:each="key : ${row.keySet()}" >
+            <td th:text="${#strings.capitalizeWords(key)}"></td>
+            <td th:text="${row.get(key)}"></td>
         </tr>
 
     </table>

@@ -28,6 +28,7 @@ public class ListController {
     }
 
     public ArrayList<String> columns = new ArrayList<>(Arrays.asList("position type", "name", "employer", "location", "core competency"));
+    public HashMap<String, String> row = new HashMap<>();
 
     @RequestMapping(value = "")
     public String list(Model model) {
@@ -45,12 +46,14 @@ public class ListController {
             model.addAttribute("title", "All Jobs");
             model.addAttribute("choices", columns);
             model.addAttribute("jobs", jobs);
+            model.addAttribute("row", row);
             return "list-jobs";
         } else {
             ArrayList<String> items = JobData.findAll(column);
             model.addAttribute("title", "All " + columnChoices.get(column) + " Values");
             model.addAttribute("column", column);
             model.addAttribute("items", items);
+            model.addAttribute("row", row);
             return "list-column";
         }
 
@@ -64,6 +67,7 @@ public class ListController {
         model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
         model.addAttribute("choices", columns);
         model.addAttribute("jobs", jobs);
+        model.addAttribute("row", row);
 
         return "list-jobs";
     }

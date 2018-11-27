@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class SearchController {
 
     public ArrayList<String> columns = new ArrayList<>(Arrays.asList("position type", "name", "employer", "location", "core competency"));
-
+    public HashMap<String, String> row = new HashMap<>();
 
     @RequestMapping(value = "")
     public String search(Model model) {
@@ -38,6 +38,7 @@ public class SearchController {
                 model.addAttribute("searchTerm", searchTerm);
                 model.addAttribute("choices", columns);
                 model.addAttribute("columns", ListController.columnChoices);
+                model.addAttribute("row", row);
 
                 return "search";
         }
@@ -51,6 +52,7 @@ public class SearchController {
             model.addAttribute("searchTerm", searchTerm);
             model.addAttribute("choices", columns);
             model.addAttribute("columns", ListController.columnChoices);
+            model.addAttribute("row", row);
 
             return "search";
         }
@@ -62,6 +64,7 @@ public class SearchController {
         model.addAttribute("searchTerm", searchTerm);
         model.addAttribute("choices", columns);
         model.addAttribute("columns", ListController.columnChoices);
+        model.addAttribute("row", row);
 
         return "search";
         //Returning search for now to test
